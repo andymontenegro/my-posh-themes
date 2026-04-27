@@ -90,17 +90,17 @@
           "style": "powerline"
         },
         {
+          "type": "git",
           "properties": {
             "branch_icon": "\uf418 ",
             "cache_duration": "none",
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "template": " \uf113 {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:git-ahead-fg> \uf046 {{ .Staging.String }}</>{{ end }}  ",
+          "template": "  \uf113 {{ .HEAD }}{{ if gt .Ahead 0 }} <p:git-ahead-fg>↑{{ .Ahead }}</>{{ end }}{{ if gt .Behind 0 }} <p:git-behind-fg>↓{{ .Behind }}</>{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:git-ahead-fg> \uf046 {{ .Staging.String }}</>{{ end }} ",
           "foreground": "p:git-default-fg",
-          "powerline_symbol": " ",
+          "powerline_symbol": "  ",
           "background": "p:git-default-bg",
-          "type": "git",
           "style": "powerline",
           "foreground_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified-fg{{ end }}",
