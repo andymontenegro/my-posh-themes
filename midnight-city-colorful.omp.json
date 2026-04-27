@@ -1,0 +1,403 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "accent": "#4E4B42",
+    "accent-9": "#63625d",
+    "git-ahead-fg": "p:cyber-green",
+    "auto-red": "#CD664D",
+    "command-error": "#F1213D",
+    "command-fg": "p:path-fg",
+    "current-path-bg": "p:cyber-cyan",
+    "current-path-fg": "#0C3537",
+    "cyber-cyan": "#5EF7FF",
+    "cyber-mute-red": "#932D29",
+    "cyber-red": "#FF6158",
+    "cyber-yellow": "#FFCC3D",
+    "cyber-blue": "#1F58A7",
+    "cyber-green": "#1CEF86",
+    "git-ahead": "#523dae",
+    "git-behind": "#C1A25B",
+    "git-default-bg": "p:cyber-yellow",
+    "git-default-fg": "#5B0301",
+    "git-diverged": "#D9502E",
+    "git-modified-bg": "p:cyber-red",
+    "git-modified-fg": "p:git-default-fg",
+    "os-bg": "#701916",
+    "os-fg": "p:path-fg",
+    "path-bg": "p:cyber-mute-red",
+    "path-fg": "#FD8680",
+    "solar-1": "#CCC6AD",
+    "surface-bg-1": "#521316",
+    "surface-bg-2": "#3c0d10",
+    "tooltip_bg": "transparent",
+    "tooltip_text": "#414b5e",
+    "b-time-bg": "p:cyber-cyan",
+    "b-time-fg": "p:current-path-fg",
+    "b-execution-bg": "p:cyber-mute-red",
+    "b-execution-fg": "p:path-fg",
+    "t-go-bg": "p:cyber-blue",
+    "t-go-fg": "#ffffff",
+    "t-npm-fg": "p:cyber-red",
+    "t-nodejs-fg": "p:cyber-green",
+    "t-angular-fg": "p:cyber-red",
+    "t-angular-bg": "p:surface-bg-1",
+    "t-dart-icon": "#2CB7F6",
+    "t-dart-bg": "p:surface-bg-1",
+    "t-ruby-fg": "p:cyber-red",
+    "t-ruby-bg": "p:surface-bg-1"
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none",
+            "linux": " \ue712",
+            "macos": " \ue711",
+            "windows": " \udb81\uddb3"
+          },
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}} {{.Shell}} ",
+          "foreground": "p:os-fg",
+          "powerline_symbol": " ",
+          "background": "p:os-bg",
+          "type": "os",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "<parentBackground>\ue0b0</> <f> \udb85\udc0b </f>",
+          "foreground": "p:cyber-red",
+          "powerline_symbol": " ",
+          "background": "p:cyber-yellow",
+          "type": "root",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "folder_icon": " \udb83\udd7c ",
+            "folder_separator_icon": " | ",
+            "style": "agnoster"
+          },
+          "template": " \ue266 {{ .Path | replace (printf \" %s\" (base .Location)) (printf \" <p:current-path-fg,p:current-path-bg> \udb80\udec4 %s </>\" (base .Location)) }}",
+          "foreground": "p:path-fg",
+          "background": "p:path-bg",
+          "type": "path",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "branch_icon": "\uf418 ",
+            "cache_duration": "none",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          },
+          "template": " \uf113 {{ .HEAD }}{{ if gt .Ahead 0 }} ↑{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ↓{{ .Behind }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:git-ahead-fg> \uf046 {{ .Staging.String }}</>{{ end }}  ",
+          "foreground": "p:git-default-fg",
+          "powerline_symbol": " ",
+          "background": "p:git-default-bg",
+          "type": "git",
+          "style": "powerline",
+          "foreground_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified-fg{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:accent{{ end }}",
+            "{{ if gt .Ahead 0 }}p:solar-1{{ end }}",
+            "{{ if gt .Behind 0 }}p:accent{{ end }}"
+          ],
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified-bg{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:surface-1{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
+          ]
+        }
+      ],
+      "newline": true
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none",
+            "fetch_package_manager": true,
+            "npm_icon": " <p:t-npm-fg>\ue5fa</> ",
+            "yarn_icon": " <p:t-npm-fg>\ue6a7</>"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " <p:t-nodejs-fg>\udb80\udf99</> {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} ",
+          "foreground": "p:path-fg",
+          "background": "p:surface-bg-1",
+          "type": "node",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue606 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "python",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue738 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "java",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue77f {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \udb81\udfd3 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:t-go-fg",
+          "background": "p:t-go-bg",
+          "type": "go",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue7a8 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " <p:t-dart-icon>\ue798</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:path-fg",
+          "background": "p:t-dart-bg",
+          "type": "dart",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue753 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:t-angular-fg",
+          "background": "p:t-angular-bg",
+          "type": "angular",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " {{ if .Error }}{{ .Error }}{{ else }}Nx {{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "nx",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " <#ca3c34>\ue624</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "julia",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:t-ruby-fg",
+          "background": "p:t-ruby-bg",
+          "type": "ruby",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \uf104<#f5bf45>\uf0e7</>\uf105 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "azfunc",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4 ",
+          "template": " \ue7ad {{.Profile}}{{if .Region}}@{{.Region}}{{end}} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "aws",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": " \uf308 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+          "foreground": "p:git-default-fg",
+          "background": "p:cyber-yellow",
+          "type": "kubectl",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "charged_icon": "\uf240 ",
+            "charging_icon": "\uf242  ",
+            "discharging_icon": "<f>\uf1e6 </f>"
+          },
+          "leading_diamond": "\ue0b2",
+          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} \u2800",
+          "foreground": "#7a7565",
+          "background": "p:surface-2",
+          "type": "battery",
+          "style": "powerline",
+          "foreground_templates": [
+            "{{if eq \"Charging\" .State.String}}#7a7565{{end}}",
+            "{{if eq \"Discharging\" .State.String}} p:surface-1 {{end}}",
+            "{{if eq \"Full\" .State.String}}#7a7565{{end}}"
+          ],
+          "background_templates": [
+            "{{if eq \"Charging\" .State.String}}p:surface-2{{end}}",
+            "{{if eq \"Discharging\" .State.String}}p:auto-red{{end}}",
+            "{{if eq \"Full\" .State.String}}p:surface-2{{end}}"
+          ],
+          "invert_powerline": true
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "style": "roundrock",
+            "threshold": 0
+          },
+          "trailing_diamond": "\ue0b4",
+          "template": " \udb81\udd1a {{ .FormattedMs }} \u2800",
+          "foreground": "p:b-execution-fg",
+          "background": "p:b-execution-bg",
+          "type": "executiontime",
+          "style": "powerline"
+        },
+        {
+          "properties": {
+            "cache_duration": "none",
+            "time_format": "15:04"
+          },
+          "leading_diamond": "\ue0b2",
+          "trailing_diamond": "\ue0b4",
+          "template": " {{ .CurrentDate | date .Format }} ",
+          "foreground": "p:b-time-fg",
+          "background": "p:b-time-bg",
+          "type": "time",
+          "style": "powerline",
+          "invert_powerline": true
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "template": "\u30b7\u30eb\u30d0\u30fc\u30cf\u30f3\u30c9",
+          "foreground": "p:command-fg",
+          "type": "text",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:command-error{{ end }}"
+          ]
+        },
+        {
+          "properties": {
+            "always_enabled": true,
+            "cache_duration": "none"
+          },
+          "template": "· : ",
+          "foreground": "p:command-fg",
+          "type": "status",
+          "style": "plain",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}p:command-error{{ end }}"
+          ]
+        }
+      ],
+      "newline": true
+    }
+  ],
+  "tooltips": [
+    {
+      "properties": {
+        "branch_icon": "\uf418 ",
+        "fetch_status": true,
+        "fetch_upstream_icon": true,
+        "fetch_user": true
+      },
+      "leading_diamond": "\ue0b6",
+      "trailing_diamond": "\ue0b4",
+      "template": "\ue5fd {{ .UpstreamURL }} {{ .HEAD }} {{ if .Staging.Changed }}{{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}",
+      "foreground": "p:cyber-yellow",
+      "background": "p:tooltip_bg",
+      "type": "git",
+      "style": "diamond",
+      "tips": [
+        "gi",
+        "git"
+      ]
+    }
+  ],
+  "version": 3
+}
