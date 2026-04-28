@@ -15,12 +15,12 @@
     "cyber-yellow": "#FFCC3D",
     "cyber-blue": "#1F58A7",
     "cyber-green": "#1CEF86",
-    "git-ahead": "#523dae",
+    "git-ahead-bg": "#9A2AF2",
     "git-behind": "#C1A25B",
     "git-default-bg": "p:cyber-yellow",
     "git-default-fg": "#5B0301",
     "git-diverged": "#D9502E",
-    "git-modified-bg": "p:cyber-red",
+    "git-modified-bg": "p:surface-bg-2",
     "git-modified-fg": "p:git-default-fg",
     "os-bg": "#701916",
     "os-fg": "p:path-fg",
@@ -28,7 +28,7 @@
     "path-fg": "#FD8680",
     "solar-1": "#CCC6AD",
     "surface-bg-1": "#521316",
-    "surface-bg-2": "#3c0d10",
+    "surface-bg-2": "#5a2428",
     "tooltip_bg": "transparent",
     "tooltip_text": "#414b5e",
     "b-time-bg": "p:cyber-cyan",
@@ -97,23 +97,23 @@
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "template": "  \uf113 {{ .HEAD }}{{ if gt .Ahead 0 }} <p:git-ahead-fg>↑{{ .Ahead }}</>{{ end }}{{ if gt .Behind 0 }} <p:git-behind-fg>↓{{ .Behind }}</>{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<p:git-ahead-fg> \uf046 {{ .Staging.String }}</>{{ end }} ",
+          "template": " \uf113 {{ .HEAD }} ",
           "foreground": "p:git-default-fg",
-          "powerline_symbol": "  ",
-          "background": "p:git-default-bg",
-          "style": "powerline",
-          "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified-fg{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:accent{{ end }}",
-            "{{ if gt .Ahead 0 }}p:solar-1{{ end }}",
-            "{{ if gt .Behind 0 }}p:accent{{ end }}"
-          ],
-          "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified-bg{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:surface-1{{ end }}",
-            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
-            "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
-          ]
+          "powerline_symbol": "",
+          "background": "p:cyber-yellow",
+          "style": "powerline"
+        },
+        {
+          "type": "git",
+          "properties": {
+            "cache_duration": "none",
+            "fetch_status": true
+          },
+          "template": "{{ if or (.Working.Changed) (.Staging.Changed) (gt .Ahead 0) (gt .Behind 0) }}{{ if gt .Ahead 0 }} <p:git-ahead-fg>↑{{ .Ahead }}</>{{ end }}{{ if gt .Behind 0 }} <p:git-behind-fg>↓{{ .Behind }}</>{{ end }}{{ if .Working.Changed }} <p:cyber-red><f>\uf044</f> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:git-ahead-fg><f>\uf046 {{ .Staging.String }}</f></>{{ end }} {{ end }}",
+          "foreground": "p:path-fg",
+          "powerline_symbol": "",
+          "background": "p:git-modified-bg",
+          "style": "powerline"
         }
       ],
       "newline": true
