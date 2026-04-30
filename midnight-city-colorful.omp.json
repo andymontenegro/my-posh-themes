@@ -16,8 +16,10 @@
     "b-time-fg": "p:current-path-fg",
     "b-time-bg": "p:cyber-cyan",
     "command-fg": "p:path-fg",
+    "command-fg-transient": "#7B3F41",
+    "command-fg-transient-time": "#A8383C",
     "command-error": "#F1213D",
-    "current-path-fg": "#0C3537",
+    "current-path-fg": "#0e3e41",
     "current-path-bg": "p:cyber-cyan",
     "git-default-fg": "#5B0301",
     "git-ahead-fg": "p:cyber-green",
@@ -350,10 +352,7 @@
           "template": "\u30b7\u30eb\u30d0\u30fc\u30cf\u30f3\u30c9",
           "foreground": "p:command-fg",
           "type": "text",
-          "style": "plain",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}p:command-error{{ end }}"
-          ]
+          "style": "plain"
         },
         {
           "properties": {
@@ -393,5 +392,10 @@
       ]
     }
   ],
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground": "p:command-fg-transient",
+    "template": "<p:command-fg-transient-time>{{ now | date \"15:04:05\" }}</> ·\u30b7\u30eb\u30d0\u30fc\u30cf\u30f3\u30c9· : "
+  },
   "version": 3
 }
