@@ -105,7 +105,7 @@
             "cache_duration": "none",
             "fetch_status": true
           },
-          "template": "{{ if or (.Working.Changed) (.Staging.Changed) (gt .Ahead 0) (gt .Behind 0) }}{{ if gt .Ahead 0 }} <p:git-ahead-fg>↑{{ .Ahead }}</>{{ end }}{{ if gt .Behind 0 }} <p:git-behind-fg>↓{{ .Behind }}</>{{ end }}{{ if .Working.Changed }} <p:cyber-red><f>\uf044</f> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:git-ahead-fg><f>\uf046 {{ .Staging.String }}</f></>{{ end }} {{ end }}",
+          "template": "{{ if or (.Working.Changed) (.Staging.Changed) (gt .Ahead 0) (gt .Behind 0) }}{{ if gt .Ahead 0 }} <p:git-ahead-fg>\uf102 {{ .Ahead }}</>{{ end }}{{ if gt .Behind 0 }} <p:git-behind-fg>\uf103 {{ .Behind }}</>{{ end }}{{ if .Working.Changed }} <p:cyber-red><f>\uf044</f> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:git-ahead-fg><f>\uf046 {{ .Staging.String }}</f></>{{ end }} {{ end }}",
           "foreground": "p:path-fg",
           "powerline_symbol": "",
           "background": "p:git-modified-bg",
