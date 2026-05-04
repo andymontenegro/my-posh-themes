@@ -291,7 +291,7 @@
           "properties": {
             "cache_duration": "none",
             "charged_icon": "\uf240 ",
-            "charging_icon": "\uf242  ",
+            "charging_icon": "\uf242 ",
             "discharging_icon": "<f>\uf1e6 </f>"
           },
           "leading_diamond": "\ue0b2",
@@ -338,6 +338,24 @@
           "type": "time",
           "style": "powerline",
           "invert_powerline": true
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "newline": true,
+      "segments": [
+        {
+          "properties": {
+            "cache_duration": "none"
+          },
+          "leading_diamond": " ",
+          "template": " <p:cyber-red>󰯉</> <p:os-fg>{{ .Model.DisplayName }}</> \udb80\ude9a {{ .TokenGauge }} ",
+          "foreground": "p:os-fg",
+          "background": "p:os-bg",
+          "type": "claude",
+          "style": "powerline"
         }
       ]
     },
